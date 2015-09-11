@@ -1,0 +1,15 @@
+{
+  "name": "bubblish",
+  "version": "0.1.0",
+  "authors": [
+    "meganemura <meganemura@users.noreply.github.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
