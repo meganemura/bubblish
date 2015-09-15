@@ -53,6 +53,26 @@ var vm = {
     //m.redraw.strategy('none');
     //m.endComputation();
   },
+
+  add_question: function add_question() {
+    vm.question_size += 1;
+    for (var i = vm.questions.length; i < vm.question_size; i++) {
+      vm.questions.push(i + 1);
+    }
+    for (var i = vm.answers.length; i < vm.question_size; i++) {
+      vm.answers.push(0);
+    };
+  },
+  remove_last_question: function remove_last_question() {
+    vm.question_size -= 1;
+    for (var i = vm.questions.length; i > vm.question_size; i--) {
+      vm.questions.pop();
+    }
+    for (var i = vm.answers.length; i > vm.question_size; i--) {
+      vm.answers.pop();
+    };
+  },
+
   querystring: function querystring() {
     var parameters = {
       size: vm.question_size,
@@ -89,13 +109,23 @@ var MenuComponent = {
   }
 };
 
+var SettingsComponent = {
+  view: function view() {
+    return m('div', [m('span', { 'class': 'mega-octicon octicon-plus', style: 'padding: 8px', onclick: function onclick() {
+        vm.add_question();
+      } }), m('span', { 'class': 'mega-octicon octicon-dash', style: 'padding: 8px', onclick: function onclick() {
+        vm.remove_last_question();
+      } })]);
+  }
+};
+
 var RootComponent = {
   controller: function controller() {
     console.log('RootComponent.controller');
     vm.load();
   },
   view: function view() {
-    return [m.component(MenuComponent), m.component(BubblesComponent)];
+    return [m.component(MenuComponent), m.component(BubblesComponent), m.component(SettingsComponent)];
   }
 };
 
