@@ -107,8 +107,8 @@ var obj = {};
 var MenuComponent = {
   view: () => {
     return m('div', [
-      m('span', {class: 'mega-octicon octicon-repo-push', style: 'padding: 8px', onclick: () => { vm.save() }}),
-      m('span', {class: 'mega-octicon octicon-browser', style: 'padding: 8px', onclick: () => { vm.top() }}),
+      m('span', {class: 'mega-octicon octicon-repo-push', style: 'padding: 8px', onclick: () => { vm.save() }}, 'Save'),
+      m('span', {class: 'mega-octicon octicon-browser', style: 'padding: 8px', onclick: () => { vm.top() }}, 'Clear'),
     ])
   }
 }
@@ -116,8 +116,8 @@ var MenuComponent = {
 var SettingsComponent = {
   view: () => {
     return m('div', [
-      m('span', {class: 'mega-octicon octicon-plus', style: 'padding: 8px', onclick: () => { vm.add_question() }}),
-      m('span', {class: 'mega-octicon octicon-dash', style: 'padding: 8px', onclick: () => { vm.remove_last_question() }}),
+      m('span', {class: 'mega-octicon octicon-plus', style: 'padding: 8px', onclick: () => { vm.add_question() }}, 'Add'),
+      m('span', {class: 'mega-octicon octicon-dash', style: 'padding: 8px', onclick: () => { vm.remove_last_question() }}, 'Remove'),
       m('h4', vm.question_size + ' questions'),
     ])
   }
