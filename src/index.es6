@@ -115,8 +115,8 @@ var HeaderComponent = {
 var MenuComponent = {
   view: () => {
     return m('div', [
-      m('span', {class: 'octicon octicon-repo-push', style: 'padding: 8px', onclick: () => { vm.save() }}, 'Save'),
-      m('span', {class: 'octicon octicon-browser', style: 'padding: 8px', onclick: () => { vm.top() }}, 'Clear'),
+      m('span', {class: 'button octicon octicon-repo-push', style: 'padding: 8px', onclick: () => { vm.save() }}, 'Save'),
+      m('span', {class: 'button octicon octicon-browser', style: 'padding: 8px', onclick: () => { vm.top() }}, 'Clear'),
     ])
   }
 }
@@ -124,9 +124,9 @@ var MenuComponent = {
 var SettingsComponent = {
   view: () => {
     return m('div', [
-      m('span', {class: 'octicon octicon-plus', style: 'padding: 8px', onclick: () => { vm.add_question() }}, 'Add'),
-      m('span', {class: 'octicon octicon-dash', style: 'padding: 8px', onclick: () => { vm.remove_last_question() }}, 'Remove'),
-      m('span', {class: 'text'}, vm.question_size + ' questions'),
+      m('span', {class: 'button octicon octicon-plus', style: 'padding: 8px', onclick: () => { vm.add_question() }}, 'Add'),
+      m('span', {class: 'button octicon octicon-dash', style: 'padding: 8px', onclick: () => { vm.remove_last_question() }}, 'Remove'),
+      m('span', {class: 'text'}, `(${vm.question_size} questions)`),
     ])
   }
 }
@@ -134,7 +134,14 @@ var SettingsComponent = {
 var FooterComponent = {
   view: () => {
     return m('div', [
-      m('span', {class: 'octicon octicon-repo-push', style: 'padding: 8px', onclick: () => { vm.save() }}, 'Save'),
+      m('span', {class: 'button octicon octicon-repo-push', style: 'padding: 8px', onclick: () => { vm.save() }}, 'Save'),
+      m('p', {align: 'right', class: 'button'}, [
+        m('span', {class: 'octicon octicon-repo', style: 'padding: 8px'}),
+        m('a', {
+          href: 'https://github.com/meganemura/bubblish',
+          style: 'text-decoration: none; color: black'
+        }, 'meganemura/bubblish'),
+      ]),
     ])
   }
 }
@@ -147,9 +154,12 @@ var RootComponent = {
   view: () => {
     return [
       m.component(HeaderComponent),
+      m('hr'),
       m.component(MenuComponent),
       m.component(SettingsComponent),
+      m('hr'),
       m.component(BubblesComponent),
+      m('hr'),
       m.component(FooterComponent),
     ];
   },
