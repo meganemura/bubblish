@@ -121,6 +121,7 @@ var SettingsComponent = {
     return m('div', [
       m('span', {class: 'mega-octicon octicon-plus', style: 'padding: 8px', onclick: () => { vm.add_question() }}),
       m('span', {class: 'mega-octicon octicon-dash', style: 'padding: 8px', onclick: () => { vm.remove_last_question() }}),
+      m('h4', vm.question_size + ' questions'),
     ])
   }
 }
@@ -133,8 +134,8 @@ var RootComponent = {
   view: () => {
     return [
       m.component(MenuComponent),
-      m.component(BubblesComponent),
       m.component(SettingsComponent),
+      m.component(BubblesComponent),
     ];
   },
 }
