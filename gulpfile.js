@@ -27,9 +27,11 @@ gulp.task('babel', function() {
   .pipe(gulp.dest('./src'))
 });
 
-gulp.task('watch', function() {
-  gulp.watch('./src/*.es6', ['babel'])
+gulp.task('babel:watch', function () {
+  gulp.watch('./src/*.es6', ['babel']);
 });
+
+gulp.task('watch', ['sass:watch', 'babel:watch']);
 
 gulp.task('deploy', ['babel', 'sass'], function() {
   return ghpages.publish(path.join(__dirname, 'src'), function(err) {

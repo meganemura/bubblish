@@ -1,23 +1,25 @@
 var BubblesComponent = {
   view: () => {
-    return m('div', {class: 'row'}, [
+    return m('div', [
       vm.questions.map( (i) => {
         return [
-          m('div', i),
-          m('div', {class: 'col-xs-12'}, [
-            '| ',
-            vm.choices.map( (choice) => { return [
-              m('input', {
-                type: 'radio',
-                name: `${i}`,
-                value: `${choice}`,
-                onclick: (event) => {
-                  vm.select(event.target.name, event.target.value)
-                },
-                checked: (vm.answers[i - 1] === choice),
-              }),
-              ` ${choice} | `,
-            ]}),
+          m('div', {class: 'row choices'}, [
+            m('span', {class: 'col-xs-2', style: 'font-weight: bold'}, i),
+            vm.choices.map( (choice) => {
+              return m('span', {class: `col-xs-${Math.floor(10 / vm.choices.length)}`}, [
+                m('input', {
+                  type: 'radio',
+                  id: `${i}:${choice}`,
+                  name: `${i}`,
+                  value: `${choice}`,
+                  onclick: (event) => {
+                    vm.select(event.target.name, event.target.value)
+                  },
+                  checked: (vm.answers[i - 1] === choice),
+                }),
+                m('label', {for: `${i}:${choice}`,style: 'padding: 0px 10px' }, `${choice}`),
+              ])
+            }),
           ]),
         ]
       }),
@@ -53,13 +55,10 @@ var vm = {
     var index = Number(name) - 1;
     vm.answers[index] = value;
 
-    console.log(vm.answers);
-    console.log(vm.querystring());
-    console.log(m.route());
-    //m.startComputation();
+    m.startComputation();
     m.route('/?' + vm.querystring());
-    //m.redraw.strategy('none');
-    //m.endComputation();
+    m.redraw.strategy('none');
+    m.endComputation();
   },
 
   add_question: () => {
@@ -72,7 +71,7 @@ var vm = {
     };
   },
   remove_last_question: () => {
-    vm.question_size -= 1;
+    vm.question_size = Math.max(vm.question_size - 1, 0);
     for (var i = vm.questions.length; i > vm.question_size; i--) {
       vm.questions.pop();
     }
@@ -105,13 +104,17 @@ var vm = {
   },
 };
 
-var obj = {};
+var HeaderComponent = {
+  view: () => {
+    return m('h2', {class: 'title'}, 'Bubblish')
+  }
+}
 
 var MenuComponent = {
   view: () => {
     return m('div', [
-      m('span', {class: 'mega-octicon octicon-repo-push', style: 'padding: 8px', onclick: () => { vm.save() }}),
-      m('span', {class: 'mega-octicon octicon-browser', style: 'padding: 8px', onclick: () => { vm.top() }}),
+      m('span', {class: 'octicon octicon-repo-push', style: 'padding: 8px', onclick: () => { vm.save() }}, 'Save'),
+      m('span', {class: 'octicon octicon-browser', style: 'padding: 8px', onclick: () => { vm.top() }}, 'Clear'),
     ])
   }
 }
@@ -119,8 +122,17 @@ var MenuComponent = {
 var SettingsComponent = {
   view: () => {
     return m('div', [
-      m('span', {class: 'mega-octicon octicon-plus', style: 'padding: 8px', onclick: () => { vm.add_question() }}),
-      m('span', {class: 'mega-octicon octicon-dash', style: 'padding: 8px', onclick: () => { vm.remove_last_question() }}),
+      m('span', {class: 'octicon octicon-plus', style: 'padding: 8px', onclick: () => { vm.add_question() }}, 'Add'),
+      m('span', {class: 'octicon octicon-dash', style: 'padding: 8px', onclick: () => { vm.remove_last_question() }}, 'Remove'),
+      m('span', {class: 'text'}, vm.question_size + ' questions'),
+    ])
+  }
+}
+
+var FooterComponent = {
+  view: () => {
+    return m('div', [
+      m('span', {class: 'octicon octicon-repo-push', style: 'padding: 8px', onclick: () => { vm.save() }}, 'Save'),
     ])
   }
 }
@@ -132,9 +144,11 @@ var RootComponent = {
   },
   view: () => {
     return [
+      m.component(HeaderComponent),
       m.component(MenuComponent),
-      m.component(BubblesComponent),
       m.component(SettingsComponent),
+      m.component(BubblesComponent),
+      m.component(FooterComponent),
     ];
   },
 }
