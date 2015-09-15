@@ -103,7 +103,13 @@ var vm = {
   },
 };
 
-var obj = {};
+var HeaderComponent = {
+  view: () => {
+    return m('div', [
+      'Bubblish'
+    ])
+  }
+}
 
 var MenuComponent = {
   view: () => {
@@ -124,6 +130,14 @@ var SettingsComponent = {
   }
 }
 
+var FooterComponent = {
+  view: () => {
+    return m('div', [
+      m('span', {class: 'mega-octicon octicon-repo-push', style: 'padding: 8px', onclick: () => { vm.save() }}, 'Save'),
+    ])
+  }
+}
+
 var RootComponent = {
   controller: () => {
     console.log('RootComponent.controller');
@@ -131,9 +145,11 @@ var RootComponent = {
   },
   view: () => {
     return [
+      m.component(HeaderComponent),
       m.component(MenuComponent),
       m.component(SettingsComponent),
       m.component(BubblesComponent),
+      m.component(FooterComponent),
     ];
   },
 }
