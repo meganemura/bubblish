@@ -97,15 +97,15 @@ var vm = {
 
 var HeaderComponent = {
   view: function view() {
-    return m('h2', { 'class': 'title' }, 'Bubblish');
+    return m('h2', { 'class': 'title' }, m('a', { href: '.', style: 'text-decoration: none; color: black' }, 'Bubblish'));
   }
 };
 
 var MenuComponent = {
   view: function view() {
-    return m('div', [m('span', { 'class': 'octicon octicon-repo-push', style: 'padding: 8px', onclick: function onclick() {
+    return m('div', [m('span', { 'class': 'button octicon octicon-repo-push', style: 'padding: 8px', onclick: function onclick() {
         vm.save();
-      } }, 'Save'), m('span', { 'class': 'octicon octicon-browser', style: 'padding: 8px', onclick: function onclick() {
+      } }, 'Save'), m('span', { 'class': 'button octicon octicon-browser', style: 'padding: 8px', onclick: function onclick() {
         vm.top();
       } }, 'Clear')]);
   }
@@ -113,19 +113,22 @@ var MenuComponent = {
 
 var SettingsComponent = {
   view: function view() {
-    return m('div', [m('span', { 'class': 'octicon octicon-plus', style: 'padding: 8px', onclick: function onclick() {
+    return m('div', [m('span', { 'class': 'button octicon octicon-plus', style: 'padding: 8px', onclick: function onclick() {
         vm.add_question();
-      } }, 'Add'), m('span', { 'class': 'octicon octicon-dash', style: 'padding: 8px', onclick: function onclick() {
+      } }, 'Add'), m('span', { 'class': 'button octicon octicon-dash', style: 'padding: 8px', onclick: function onclick() {
         vm.remove_last_question();
-      } }, 'Remove'), m('span', { 'class': 'text' }, vm.question_size + ' questions')]);
+      } }, 'Remove'), m('span', { 'class': 'text' }, '(' + vm.question_size + ' questions)')]);
   }
 };
 
 var FooterComponent = {
   view: function view() {
-    return m('div', [m('span', { 'class': 'octicon octicon-repo-push', style: 'padding: 8px', onclick: function onclick() {
+    return m('div', [m('span', { 'class': 'button octicon octicon-repo-push', style: 'padding: 8px', onclick: function onclick() {
         vm.save();
-      } }, 'Save')]);
+      } }, 'Save'), m('p', { align: 'right', 'class': 'button' }, [m('span', { 'class': 'octicon octicon-repo', style: 'padding: 8px' }), m('a', {
+      href: 'https://github.com/meganemura/bubblish',
+      style: 'text-decoration: none; color: black'
+    }, 'meganemura/bubblish')])]);
   }
 };
 
@@ -135,7 +138,7 @@ var RootComponent = {
     vm.load();
   },
   view: function view() {
-    return [m.component(HeaderComponent), m.component(MenuComponent), m.component(SettingsComponent), m.component(BubblesComponent), m.component(FooterComponent)];
+    return [m.component(HeaderComponent), m('hr'), m.component(MenuComponent), m.component(SettingsComponent), m('hr'), m.component(BubblesComponent), m('hr'), m.component(FooterComponent)];
   }
 };
 

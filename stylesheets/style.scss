@@ -31,5 +31,8 @@ body {
   font-size: 15px;
   font-family: 'Ubuntu Condensed', sans-serif;
 }
+.button:active {
+  font-weight: bold;
+}
 
 @import url(https://fonts.googleapis.com/css?family=Ubuntu+Condensed);
