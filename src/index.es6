@@ -9,6 +9,7 @@ var BubblesComponent = {
               return m('span', {class: `col-xs-${Math.floor(10 / vm.choices.length)}`}, [
                 m('input', {
                   type: 'radio',
+                  id: `${i}:${choice}`,
                   name: `${i}`,
                   value: `${choice}`,
                   onclick: (event) => {
@@ -16,7 +17,7 @@ var BubblesComponent = {
                   },
                   checked: (vm.answers[i - 1] === choice),
                 }),
-                ` ${choice}`,
+                m('label', {for: `${i}:${choice}`,style: 'padding: 0px 10px' }, `${choice}`),
               ])
             }),
           ]),
@@ -112,8 +113,8 @@ var HeaderComponent = {
 var MenuComponent = {
   view: () => {
     return m('div', [
-      m('span', {class: 'mega-octicon octicon-repo-push', style: 'padding: 8px', onclick: () => { vm.save() }}, 'Save'),
-      m('span', {class: 'mega-octicon octicon-browser', style: 'padding: 8px', onclick: () => { vm.top() }}, 'Clear'),
+      m('span', {class: 'octicon octicon-repo-push', style: 'padding: 8px', onclick: () => { vm.save() }}, 'Save'),
+      m('span', {class: 'octicon octicon-browser', style: 'padding: 8px', onclick: () => { vm.top() }}, 'Clear'),
     ])
   }
 }
@@ -121,9 +122,9 @@ var MenuComponent = {
 var SettingsComponent = {
   view: () => {
     return m('div', [
-      m('span', {class: 'mega-octicon octicon-plus', style: 'padding: 8px', onclick: () => { vm.add_question() }}, 'Add'),
-      m('span', {class: 'mega-octicon octicon-dash', style: 'padding: 8px', onclick: () => { vm.remove_last_question() }}, 'Remove'),
-      m('h4', vm.question_size + ' questions'),
+      m('span', {class: 'octicon octicon-plus', style: 'padding: 8px', onclick: () => { vm.add_question() }}, 'Add'),
+      m('span', {class: 'octicon octicon-dash', style: 'padding: 8px', onclick: () => { vm.remove_last_question() }}, 'Remove'),
+      m('span', {class: 'text'}, vm.question_size + ' questions'),
     ])
   }
 }
@@ -131,7 +132,7 @@ var SettingsComponent = {
 var FooterComponent = {
   view: () => {
     return m('div', [
-      m('span', {class: 'mega-octicon octicon-repo-push', style: 'padding: 8px', onclick: () => { vm.save() }}, 'Save'),
+      m('span', {class: 'octicon octicon-repo-push', style: 'padding: 8px', onclick: () => { vm.save() }}, 'Save'),
     ])
   }
 }
