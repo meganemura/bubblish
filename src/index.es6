@@ -69,7 +69,7 @@ var vm = {
     };
   },
   remove_last_question: () => {
-    vm.question_size -= 1;
+    vm.question_size = Math.max(vm.question_size - 1, 0);
     for (var i = vm.questions.length; i > vm.question_size; i--) {
       vm.questions.pop();
     }
