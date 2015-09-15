@@ -53,13 +53,10 @@ var vm = {
     var index = Number(name) - 1;
     vm.answers[index] = value;
 
-    console.log(vm.answers);
-    console.log(vm.querystring());
-    console.log(m.route());
-    //m.startComputation();
+    m.startComputation();
     m.route('/?' + vm.querystring());
-    //m.redraw.strategy('none');
-    //m.endComputation();
+    m.redraw.strategy('none');
+    m.endComputation();
   },
 
   add_question: () => {
