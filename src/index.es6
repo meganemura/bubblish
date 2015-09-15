@@ -107,7 +107,8 @@ var vm = {
 
 var HeaderComponent = {
   view: () => {
-    return m('h2', {class: 'title'}, 'Bubblish')
+    return m('h2', {class: 'title'},
+             m('a', {href: '.', style: 'text-decoration: none; color: black' }, 'Bubblish'))
   }
 }
 
