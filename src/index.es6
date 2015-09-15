@@ -1,23 +1,24 @@
 var BubblesComponent = {
   view: () => {
-    return m('div', {class: 'row'}, [
+    return m('div', [
       vm.questions.map( (i) => {
         return [
-          m('div', i),
-          m('div', {class: 'col-xs-12'}, [
-            '| ',
-            vm.choices.map( (choice) => { return [
-              m('input', {
-                type: 'radio',
-                name: `${i}`,
-                value: `${choice}`,
-                onclick: (event) => {
-                  vm.select(event.target.name, event.target.value)
-                },
-                checked: (vm.answers[i - 1] === choice),
-              }),
-              ` ${choice} | `,
-            ]}),
+          m('div', {class: 'row choices'}, [
+            m('span', {class: 'col-xs-2', style: 'font-weight: bold'}, i),
+            vm.choices.map( (choice) => {
+              return m('span', {class: `col-xs-${Math.floor(10 / vm.choices.length)}`}, [
+                m('input', {
+                  type: 'radio',
+                  name: `${i}`,
+                  value: `${choice}`,
+                  onclick: (event) => {
+                    vm.select(event.target.name, event.target.value)
+                  },
+                  checked: (vm.answers[i - 1] === choice),
+                }),
+                ` ${choice}`,
+              ])
+            }),
           ]),
         ]
       }),
