@@ -13,7 +13,7 @@ var BubblesComponent = {
             vm.select(event.target.name, event.target.value);
           },
           checked: vm.answers[i - 1] === choice
-        }), m('label', { 'for': i + ':' + choice, style: 'padding: 0px 10px' }, '' + choice)]);
+        }), m('br'), m('label', { 'for': i + ':' + choice }, '' + choice)]);
       })])];
     })]);
   }
