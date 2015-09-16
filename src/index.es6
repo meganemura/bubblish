@@ -15,7 +15,7 @@ var BubblesComponent = {
                   onclick: (event) => {
                     vm.select(event.target.name, event.target.value)
                   },
-                  checked: (vm.answers[i - 1] === choice),
+                  checked: (vm.selections[i - 1] === choice),
                 }),
                 m('br'),
                 `${choice}`,
@@ -44,17 +44,17 @@ var vm = {
     for(var i = 1; i <= vm.question_size; i++) {
       vm.questions.push(i);
     }
-    if (!vm.answers) {
-      vm.answers = [];
+    if (!vm.selections) {
+      vm.selections = [];
       for(var i = 1; i <= vm.question_size; i++) {
-        vm.answers.push(0);
+        vm.selections.push(0);
       }
     }
   },
 
   select: (name, value) => {
     var index = Number(name) - 1;
-    vm.answers[index] = value;
+    vm.selections[index] = value;
 
     m.startComputation();
     m.route('/?' + vm.querystring());
@@ -67,8 +67,8 @@ var vm = {
     for (var i = vm.questions.length; i < vm.question_size; i++) {
       vm.questions.push(i + 1);
     }
-    for (var i = vm.answers.length; i < vm.question_size; i++) {
-      vm.answers.push(0);
+    for (var i = vm.selections.length; i < vm.question_size; i++) {
+      vm.selections.push(0);
     };
   },
   remove_last_question: () => {
@@ -76,8 +76,8 @@ var vm = {
     for (var i = vm.questions.length; i > vm.question_size; i--) {
       vm.questions.pop();
     }
-    for (var i = vm.answers.length; i > vm.question_size; i--) {
-      vm.answers.pop();
+    for (var i = vm.selections.length; i > vm.question_size; i--) {
+      vm.selections.pop();
     };
   },
 
@@ -85,7 +85,7 @@ var vm = {
     var parameters = {
       size: vm.question_size,
       choices: vm.choices.join(''),
-      answers: vm.answers.join(''),
+      selections: vm.selections.join(''),
     };
     return m.route.buildQueryString(parameters);
   },
@@ -95,7 +95,7 @@ var vm = {
   load: () => {
     console.log('vm.load()');
     vm.question_size = Number((m.route.param("size") || vm.default.question_size ));
-    vm.answers       = (m.route.param("answers") || "00000").split("");
+    vm.selections       = (m.route.param("selections") || "00000").split("");
     vm.choices       = (m.route.param("choices") || "abcd").split("");
     vm.init();
   },
