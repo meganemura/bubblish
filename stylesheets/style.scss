@@ -21,6 +21,9 @@ body {
   padding: 15px;
   font-size: 20px;
 }
+.choice:hover {
+  background-color: #ffa;
+}
 .onepx {
   width: 1px;
 }
@@ -31,8 +34,14 @@ body {
   font-size: 15px;
   font-family: 'Ubuntu Condensed', sans-serif;
 }
+.button {
+  cursor: pointer;
+}
 .button:active {
   font-weight: bold;
+}
+label {
+  cursor: pointer;
 }
 
 @import url(https://fonts.googleapis.com/css?family=Ubuntu+Condensed);

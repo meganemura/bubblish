@@ -4,7 +4,7 @@ var BubblesComponent = {
   view: function view() {
     return m('div', [vm.questions.map(function (i) {
       return [m('div', { 'class': 'row choices' }, [m('span', { 'class': 'col-xs-2', style: 'font-weight: bold' }, i), vm.choices.map(function (choice) {
-        return m('span', { 'class': 'col-xs-' + Math.floor(10 / vm.choices.length) }, [m('input', {
+        return m('label', { 'class': 'choice col-xs-' + Math.floor(10 / vm.choices.length), 'for': i + ':' + choice, align: 'center' }, [m('input', {
           type: 'radio',
           id: i + ':' + choice,
           name: '' + i,
@@ -13,7 +13,7 @@ var BubblesComponent = {
             vm.select(event.target.name, event.target.value);
           },
           checked: vm.answers[i - 1] === choice
-        }), m('br'), m('label', { 'for': i + ':' + choice }, '' + choice)]);
+        }), m('br'), '' + choice]);
       })])];
     })]);
   }
@@ -21,7 +21,7 @@ var BubblesComponent = {
 
 var vm = {
   'default': {
-    question_size: 5,
+    question_size: 20,
     choices: ['a', 'b', 'c', 'd']
   },
 
@@ -125,10 +125,7 @@ var FooterComponent = {
   view: function view() {
     return m('div', [m('span', { 'class': 'button octicon octicon-repo-push', style: 'padding: 8px', onclick: function onclick() {
         vm.save();
-      } }, 'Save'), m('p', { align: 'right', 'class': 'button' }, [m('span', { 'class': 'octicon octicon-repo', style: 'padding: 8px' }), m('a', {
-      href: 'https://github.com/meganemura/bubblish',
-      style: 'text-decoration: none; color: black'
-    }, 'meganemura/bubblish')])]);
+      } }, 'Save'), m('p', { align: 'right', 'class': 'button' }, [m('a', { href: 'https://github.com/meganemura/bubblish', style: 'text-decoration: none; color: black' }, [m('span', { 'class': 'octicon octicon-repo', style: 'padding: 8px' }), 'meganemura/bubblish'])])]);
   }
 };
 
