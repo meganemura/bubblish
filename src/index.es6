@@ -31,7 +31,7 @@ var BubblesComponent = {
 
 var vm = {
   default: {
-    question_size: 5,
+    question_size: 20,
     choices: ['a', 'b', 'c', 'd'],
   },
 
