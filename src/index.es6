@@ -115,18 +115,21 @@ var HeaderComponent = {
 var MenuComponent = {
   view: () => {
     return m('div', [
-      m('span', {class: 'button octicon octicon-repo-push', style: 'padding: 8px', onclick: () => { vm.save() }}, 'Save'),
-      m('span', {class: 'button octicon octicon-browser', style: 'padding: 8px', onclick: () => { vm.top() }}, 'Clear'),
+      m('span', {class: 'button octicon octicon-repo-push', style: 'padding: 8px', onclick: () => { vm.save() }}, m('span', {class: 'text', style: 'padding: 8px'}, 'Save')),
+      m('span', {class: 'button octicon octicon-browser', style: 'padding: 8px', onclick: () => { vm.top() }}, m('span', {class: 'text', style: 'padding: 8px'}, 'Clear')),
     ])
   }
 }
 
 var SettingsComponent = {
   view: () => {
-    return m('div', [
-      m('span', {class: 'button octicon octicon-plus', style: 'padding: 8px', onclick: () => { vm.add_question() }}, 'Add'),
-      m('span', {class: 'button octicon octicon-dash', style: 'padding: 8px', onclick: () => { vm.remove_last_question() }}, 'Remove'),
-      m('span', {class: 'text'}, `(${vm.question_size} questions)`),
+    return m('div', {class: 'text'}, [
+      m('span', 'Questions:'),
+      m('span', {class: 'button octicon octicon-plus', style: 'padding: 8px', onclick: () => { vm.add_question() }}, m('span', {class: 'text', style: 'padding: 8px'}, 'Add')),
+      m('span', {class: 'button octicon octicon-dash', style: 'padding: 8px', onclick: () => { vm.remove_last_question() }}, m('span', {class: 'text', style: 'padding: 8px'}, 'Remove')),
+      m('span', `(${vm.question_size} questions)`),
+      m('br'),
+      m('span', 'View:'),
     ])
   }
 }
@@ -134,7 +137,7 @@ var SettingsComponent = {
 var FooterComponent = {
   view: () => {
     return m('div', [
-      m('span', {class: 'button octicon octicon-repo-push', style: 'padding: 8px', onclick: () => { vm.save() }}, 'Save'),
+      m('span', {class: 'button octicon octicon-repo-push', style: 'padding: 8px', onclick: () => { vm.save() }}, m('span', {class: 'text', style: 'padding: 8px'}, 'Save')),
       m('p', {align: 'right', class: 'button'}, [
         m('a', {href: 'https://github.com/meganemura/bubblish', style: 'text-decoration: none; color: black'}, [
           m('span', { 'class': 'octicon octicon-repo', style: 'padding: 8px' }),
