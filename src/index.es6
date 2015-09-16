@@ -15,7 +15,7 @@ var BubblesComponent = {
                   onclick: (event) => {
                     vm.select(event.target.name, event.target.value)
                   },
-                  checked: (vm.selections[i - 1] === choice),
+                  checked: (vm[vm.mode()][i - 1] === choice),
                 }),
                 m('br'),
                 `${choice}`,
@@ -39,11 +39,15 @@ var vm = {
     console.log('vm.init');
     vm.question_size = vm.question_size || vm.default.question_size;
     vm.choices = vm.choices || vm.default.choices;
+    vm.mode = m.prop('selections');
 
+    // questions
     vm.questions = [];
     for(var i = 1; i <= vm.question_size; i++) {
       vm.questions.push(i);
     }
+
+    // selections
     if (!vm.selections) {
       vm.selections = [];
       for(var i = 1; i <= vm.question_size; i++) {
@@ -54,8 +58,13 @@ var vm = {
 
   select: (name, value) => {
     var index = Number(name) - 1;
-    vm.selections[index] = value;
 
+    vm[vm.mode()][index] = value;
+    for (var i = 0; i < index; i++) {
+      vm[vm.mode()][i] = vm[vm.mode()][i] || '0';
+    }
+
+    // https://github.com/lhorie/mithril.js/issues/790#issuecomment-139310226
     m.startComputation();
     m.route('/?' + vm.querystring());
     m.redraw.strategy('none');
@@ -82,10 +91,14 @@ var vm = {
   },
 
   querystring: () => {
+    console.log('Mode: ' + vm.mode());
+    console.log(vm.selections);
+    console.log(vm.answers);
     var parameters = {
       size: vm.question_size,
       choices: vm.choices.join(''),
       selections: vm.selections.join(''),
+      answers: vm.answers.join(''),
     };
     return m.route.buildQueryString(parameters);
   },
@@ -96,8 +109,8 @@ var vm = {
     console.log('vm.load()');
     vm.question_size = Number((m.route.param("size") || vm.default.question_size ));
     vm.selections    = (m.route.param("selections") || "00000").split("");
+    vm.answers       = (m.route.param("answers") || "00000").split("");
     vm.choices       = (m.route.param("choices") || "abcd").split("");
-    vm.init();
   },
   // for dev
   top: () => {
@@ -132,9 +145,10 @@ var SettingsComponent = {
       m('span', {class: 'button octicon octicon-dash', style: 'padding: 8px', onclick: () => { vm.remove_last_question() }}, m('span', {class: 'text', style: 'padding: 8px'}, 'Remove')),
       m('span', `(${vm.question_size} questions)`),
       m('br'),
-      m('span', 'View:'),
-      m('span', {class: 'button octicon octicon-file-text', style: 'padding: 8px', onclick: () => { vm.top() }}, m('span', {class: 'text', style: 'padding: 8px'}, 'Selection')),
-      m('span', {class: 'button octicon octicon-file-zip', style: 'padding: 8px', onclick: () => { vm.top() }}, m('span', {class: 'text', style: 'padding: 8px'}, 'Answer')),
+      m('span', 'View: '),
+      m('span', vm.mode()),
+      m('span', {class: 'button octicon octicon-file-text', style: 'padding: 8px', onclick: () => { vm.mode('selections'); vm.load(); }}, m('span', {class: 'text', style: 'padding: 8px'}, 'Selection')),
+      m('span', {class: 'button octicon octicon-file-zip', style: 'padding: 8px', onclick: () => { vm.mode('answers'); vm.load(); }}, m('span', {class: 'text', style: 'padding: 8px'}, 'Answer')),
     ])
   }
 }
