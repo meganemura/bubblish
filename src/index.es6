@@ -6,7 +6,7 @@ var BubblesComponent = {
           m('div', {class: 'row choices'}, [
             m('span', {class: 'col-xs-2', style: 'font-weight: bold'}, i),
             vm.choices.map( (choice) => {
-              return m('span', {class: `col-xs-${Math.floor(10 / vm.choices.length)}`}, [
+              return m('label', {class: `col-xs-${Math.floor(10 / vm.choices.length)}`, for: `${i}:${choice}`, align: 'center'}, [
                 m('input', {
                   type: 'radio',
                   id: `${i}:${choice}`,
@@ -18,7 +18,7 @@ var BubblesComponent = {
                   checked: (vm.answers[i - 1] === choice),
                 }),
                 m('br'),
-                m('label', {for: `${i}:${choice}`}, `${choice}`),
+                `${choice}`,
               ])
             }),
           ]),
