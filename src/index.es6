@@ -136,11 +136,10 @@ var FooterComponent = {
     return m('div', [
       m('span', {class: 'button octicon octicon-repo-push', style: 'padding: 8px', onclick: () => { vm.save() }}, 'Save'),
       m('p', {align: 'right', class: 'button'}, [
-        m('span', {class: 'octicon octicon-repo', style: 'padding: 8px'}),
-        m('a', {
-          href: 'https://github.com/meganemura/bubblish',
-          style: 'text-decoration: none; color: black'
-        }, 'meganemura/bubblish'),
+        m('a', {href: 'https://github.com/meganemura/bubblish', style: 'text-decoration: none; color: black'}, [
+          m('span', { 'class': 'octicon octicon-repo', style: 'padding: 8px' }),
+          'meganemura/bubblish',
+        ]),
       ]),
     ])
   }
