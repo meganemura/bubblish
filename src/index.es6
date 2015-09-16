@@ -95,7 +95,7 @@ var vm = {
   load: () => {
     console.log('vm.load()');
     vm.question_size = Number((m.route.param("size") || vm.default.question_size ));
-    vm.selections       = (m.route.param("selections") || "00000").split("");
+    vm.selections    = (m.route.param("selections") || "00000").split("");
     vm.choices       = (m.route.param("choices") || "abcd").split("");
     vm.init();
   },
