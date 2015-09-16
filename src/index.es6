@@ -41,19 +41,13 @@ var vm = {
     vm.choices = vm.choices || vm.default.choices;
     vm.mode = m.prop('selections');
 
-    // questions
     vm.questions = [];
     for(var i = 1; i <= vm.question_size; i++) {
       vm.questions.push(i);
     }
 
-    // selections
-    if (!vm.selections) {
-      vm.selections = [];
-      for(var i = 1; i <= vm.question_size; i++) {
-        vm.selections.push(0);
-      }
-    }
+    vm.selections = [];
+    vm.answers = [];
   },
 
   select: (name, value) => {
@@ -61,6 +55,7 @@ var vm = {
 
     vm[vm.mode()][index] = value;
     for (var i = 0; i < index; i++) {
+      // Fill array
       vm[vm.mode()][i] = vm[vm.mode()][i] || '0';
     }
 
