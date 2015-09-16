@@ -31,6 +31,9 @@ body {
   font-size: 15px;
   font-family: 'Ubuntu Condensed', sans-serif;
 }
+.button {
+  cursor: pointer;
+}
 .button:active {
   font-weight: bold;
 }
