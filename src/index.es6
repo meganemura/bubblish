@@ -130,6 +130,8 @@ var SettingsComponent = {
       m('span', `(${vm.question_size} questions)`),
       m('br'),
       m('span', 'View:'),
+      m('span', {class: 'button octicon octicon-file-text', style: 'padding: 8px', onclick: () => { vm.top() }}, m('span', {class: 'text', style: 'padding: 8px'}, 'Selection')),
+      m('span', {class: 'button octicon octicon-file-zip', style: 'padding: 8px', onclick: () => { vm.top() }}, m('span', {class: 'text', style: 'padding: 8px'}, 'Answer')),
     ])
   }
 }
