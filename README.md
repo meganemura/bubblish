@@ -7,5 +7,7 @@ Simple shareable bubble sheet generator
 ```bash
 $ npm install
 $ bower install
-$ gulp server   # and open http://0.0.0.0/bubblish
+$ gulp server
 ```
+
+and open [http://0.0.0.0:8000/bubblish](http://0.0.0.0:8000/bubblish).
