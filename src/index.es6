@@ -30,10 +30,12 @@ var BubblesComponent = {
     var selection = vm['selections'][i - 1];
     var answer    = vm['answers'][i - 1];
 
-    if (!selection || !answer) { return '' }
-
-    if (selection == answer) {
-      console.log(`${i}: ${selection}:${answer}`);
+    // console.log(`${i}: ${selection}:${answer}`);
+    if (!selection && !answer) {
+      return ''
+    } else if (!selection && answer) {
+      return 'rateReady';
+    } else if (selection == answer) {
       return 'rateCorrect';
     } else {
       return 'rateIncorrect';
