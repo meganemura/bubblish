@@ -8,6 +8,14 @@ body {
 .container {
   max-width: 600px;
 }
+
+.rateCorrect {
+  background-color: #5cb85c;
+}
+.rateIncorrect {
+  background-color: #d9534f;
+}
+
 .choices {
   padding: 15px;
   font-size: 20px;
