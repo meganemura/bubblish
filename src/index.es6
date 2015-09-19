@@ -124,13 +124,15 @@ var HeaderComponent = {
 var MenuComponent = {
   view: () => {
     return m('div', [
-      m('span', {class: 'button octicon octicon-repo-push', style: 'padding: 8px', onclick: () => { vm.save() }}, m('span', {class: 'text', style: 'padding: 8px'}, 'Save')),
+      m('span', {class: 'button octicon octicon-repo-push', style: 'padding: 8px', onclick: () => { vm.save() }}, [
+        m('span', {class: 'text', style: 'padding: 8px'}, 'Save')
+      ]),
       m('a', {href: '.', style: 'text-decoration: none; color: black'}, [
         m('span', {class: 'button octicon octicon-browser', style: 'padding: 8px'},
         m('span', {class: 'text', style: 'padding: 8px'}, 'Clear')),
       ]),
     ])
-  }
+  },
 }
 
 var SettingsComponent = {
@@ -142,11 +144,22 @@ var SettingsComponent = {
       m('span', `(${vm.question_size} questions)`),
       m('br'),
       m('span', 'View: '),
-      m('span', vm.mode()),
-      m('span', {class: 'button octicon octicon-file-text', style: 'padding: 8px', onclick: () => { vm.mode('selections'); vm.load(); }}, m('span', {class: 'text', style: 'padding: 8px'}, 'Selection')),
-      m('span', {class: 'button octicon octicon-file-zip', style: 'padding: 8px', onclick: () => { vm.mode('answers'); vm.load(); }}, m('span', {class: 'text', style: 'padding: 8px'}, 'Answer')),
+      m('span', {class: 'button octicon octicon-file-text', style: 'padding: 8px', onclick: () => { vm.mode('selections'); vm.load(); }}, [
+        m('span', {class: 'text', style: SettingsComponent.styleFor('selections')}, 'Selection'),
+      ]),
+      m('span', {class: 'button octicon octicon-file-zip', style: 'padding: 8px', onclick: () => { vm.mode('answers'); vm.load(); }}, [
+        m('span', {class: 'text', style: SettingsComponent.styleFor('answers')}, 'Answer')
+      ]),
     ])
-  }
+  },
+  styleFor: (mode) => {
+    var style = 'padding: 8px;';
+    if (vm.mode() === mode) {
+      style += 'text-decoration: underline; font-weight: bold';
+    }
+    console.log(vm.mode());
+    return style;
+  },
 }
 
 var FooterComponent = {
