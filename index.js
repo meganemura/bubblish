@@ -3,7 +3,7 @@
 var BubblesComponent = {
   view: function view() {
     return m('div', { 'class': vm.mode() }, [vm.questions.map(function (i) {
-      return [m('div', { 'class': 'row choices' }, [m('span', { 'class': 'col-xs-2', style: 'font-weight: bold' }, i), vm.choices.map(function (choice) {
+      return [m('div', { 'class': 'row choices' }, [m('span', { 'class': 'col-xs-2 ' + BubblesComponent.ratingClass(i), style: 'font-weight: bold' }, i), vm.choices.map(function (choice) {
         return m('label', { 'class': 'choice col-xs-' + Math.floor(10 / vm.choices.length), 'for': i + ':' + choice, align: 'center' }, [m('input', {
           type: 'radio',
           id: i + ':' + choice,
@@ -16,6 +16,21 @@ var BubblesComponent = {
         }), m('br'), '' + choice]);
       })])];
     })]);
+  },
+  ratingClass: function ratingClass(i) {
+    var selection = vm['selections'][i - 1];
+    var answer = vm['answers'][i - 1];
+
+    // console.log(`${i}: ${selection}:${answer}`);
+    if (!selection && !answer) {
+      return '';
+    } else if (!selection && answer) {
+      return 'rateReady';
+    } else if (selection == answer) {
+      return 'rateCorrect';
+    } else {
+      return 'rateIncorrect';
+    }
   }
 };
 
@@ -30,6 +45,7 @@ var vm = {
     vm.question_size = vm.question_size || vm['default'].question_size;
     vm.choices = vm.choices || vm['default'].choices;
     vm.mode = m.prop('selections');
+    vm.ratingType = m.prop('immediately');
 
     vm.questions = [];
     for (var i = 1; i <= vm.question_size; i++) {
@@ -94,8 +110,8 @@ var vm = {
   load: function load() {
     console.log('vm.load()');
     vm.question_size = Number(m.route.param("size") || vm['default'].question_size);
-    vm.selections = (m.route.param("selections") || "00000").split("");
-    vm.answers = (m.route.param("answers") || "00000").split("");
+    vm.selections = m.route.param('selections') && m.route.param('selections').split('') || [];
+    vm.answers = m.route.param('answers') && m.route.param('answers').split('') || [];
     vm.choices = (m.route.param("choices") || "abcd").split("");
   },
   // for dev
@@ -125,17 +141,18 @@ var SettingsComponent = {
       } }, m('span', { 'class': 'text', style: 'padding: 8px' }, 'Add')), m('span', { 'class': 'button octicon octicon-dash', style: 'padding: 8px', onclick: function onclick() {
         vm.remove_last_question();
       } }, m('span', { 'class': 'text', style: 'padding: 8px' }, 'Remove')), m('span', '(' + vm.question_size + ' questions)'), m('br'), m('span', 'View: '), m('span', { 'class': 'button octicon octicon-file-text', style: 'padding: 8px', onclick: function onclick() {
-        vm.mode('selections');vm.load();
+        vm.mode('selections');
       } }, [m('span', { 'class': 'text', style: SettingsComponent.styleFor('selections') }, 'Selection')]), m('span', { 'class': 'button octicon octicon-file-zip', style: 'padding: 8px', onclick: function onclick() {
-        vm.mode('answers');vm.load();
-      } }, [m('span', { 'class': 'text', style: SettingsComponent.styleFor('answers') }, 'Answer')])]);
+        vm.mode('answers');
+      } }, [m('span', { 'class': 'text', style: SettingsComponent.styleFor('answers') }, 'Answer')]), m('br'), m('span', 'Rating: '), m('span', { 'class': 'button octicon octicon-file-text', style: 'padding: 8px', onclick: function onclick() {
+        vm.ratingType('immediately');vm.load();
+      } }, [m('span', { 'class': 'text', style: 'padding: 8px' }, 'immediately')])]);
   },
   styleFor: function styleFor(mode) {
     var style = 'padding: 8px;';
     if (vm.mode() === mode) {
       style += 'text-decoration: underline; font-weight: bold';
     }
-    console.log(vm.mode());
     return style;
   }
 };
