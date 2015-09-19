@@ -1,6 +1,6 @@
 var BubblesComponent = {
   view: () => {
-    return m('div', [
+    return m('div', {class: vm.mode()}, [
       vm.questions.map( (i) => {
         return [
           m('div', {class: 'row choices'}, [
