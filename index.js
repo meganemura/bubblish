@@ -114,7 +114,7 @@ var MenuComponent = {
   view: function view() {
     return m('div', [m('span', { 'class': 'button octicon octicon-repo-push', style: 'padding: 8px', onclick: function onclick() {
         vm.save();
-      } }, m('span', { 'class': 'text', style: 'padding: 8px' }, 'Save')), m('a', { href: '.', style: 'text-decoration: none; color: black' }, [m('span', { 'class': 'button octicon octicon-browser', style: 'padding: 8px' }, m('span', { 'class': 'text', style: 'padding: 8px' }, 'Clear'))])]);
+      } }, [m('span', { 'class': 'text', style: 'padding: 8px' }, 'Save')]), m('a', { href: '.', style: 'text-decoration: none; color: black' }, [m('span', { 'class': 'button octicon octicon-browser', style: 'padding: 8px' }, m('span', { 'class': 'text', style: 'padding: 8px' }, 'Clear'))])]);
   }
 };
 
@@ -124,11 +124,19 @@ var SettingsComponent = {
         vm.add_question();
       } }, m('span', { 'class': 'text', style: 'padding: 8px' }, 'Add')), m('span', { 'class': 'button octicon octicon-dash', style: 'padding: 8px', onclick: function onclick() {
         vm.remove_last_question();
-      } }, m('span', { 'class': 'text', style: 'padding: 8px' }, 'Remove')), m('span', '(' + vm.question_size + ' questions)'), m('br'), m('span', 'View: '), m('span', vm.mode()), m('span', { 'class': 'button octicon octicon-file-text', style: 'padding: 8px', onclick: function onclick() {
+      } }, m('span', { 'class': 'text', style: 'padding: 8px' }, 'Remove')), m('span', '(' + vm.question_size + ' questions)'), m('br'), m('span', 'View: '), m('span', { 'class': 'button octicon octicon-file-text', style: 'padding: 8px', onclick: function onclick() {
         vm.mode('selections');vm.load();
-      } }, m('span', { 'class': 'text', style: 'padding: 8px' }, 'Selection')), m('span', { 'class': 'button octicon octicon-file-zip', style: 'padding: 8px', onclick: function onclick() {
+      } }, [m('span', { 'class': 'text', style: SettingsComponent.styleFor('selections') }, 'Selection')]), m('span', { 'class': 'button octicon octicon-file-zip', style: 'padding: 8px', onclick: function onclick() {
         vm.mode('answers');vm.load();
-      } }, m('span', { 'class': 'text', style: 'padding: 8px' }, 'Answer'))]);
+      } }, [m('span', { 'class': 'text', style: SettingsComponent.styleFor('answers') }, 'Answer')])]);
+  },
+  styleFor: function styleFor(mode) {
+    var style = 'padding: 8px;';
+    if (vm.mode() === mode) {
+      style += 'text-decoration: underline; font-weight: bold';
+    }
+    console.log(vm.mode());
+    return style;
   }
 };
 
