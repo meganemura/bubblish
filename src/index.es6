@@ -59,11 +59,7 @@ var vm = {
       vm[vm.mode()][i] = vm[vm.mode()][i] || '0';
     }
 
-    // https://github.com/lhorie/mithril.js/issues/790#issuecomment-139310226
-    m.startComputation();
-    m.route('/?' + vm.querystring());
-    m.redraw.strategy('none');
-    m.endComputation();
+    // vm.save();
   },
 
   add_question: () => {
@@ -98,6 +94,11 @@ var vm = {
     return m.route.buildQueryString(parameters);
   },
   save: () => {
+    // // https://github.com/lhorie/mithril.js/issues/790#issuecomment-139310226
+    // m.startComputation();
+    // m.route('/?' + vm.querystring());
+    // m.redraw.strategy('none');
+    // m.endComputation();
     m.route('/?' + vm.querystring());
   },
   load: () => {
