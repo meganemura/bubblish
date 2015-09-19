@@ -144,10 +144,10 @@ var SettingsComponent = {
       m('span', `(${vm.question_size} questions)`),
       m('br'),
       m('span', 'View: '),
-      m('span', {class: 'button octicon octicon-file-text', style: 'padding: 8px', onclick: () => { vm.mode('selections'); vm.load(); }}, [
+      m('span', {class: 'button octicon octicon-file-text', style: 'padding: 8px', onclick: () => { vm.mode('selections') }}, [
         m('span', {class: 'text', style: SettingsComponent.styleFor('selections')}, 'Selection'),
       ]),
-      m('span', {class: 'button octicon octicon-file-zip', style: 'padding: 8px', onclick: () => { vm.mode('answers'); vm.load(); }}, [
+      m('span', {class: 'button octicon octicon-file-zip', style: 'padding: 8px', onclick: () => { vm.mode('answers') }}, [
         m('span', {class: 'text', style: SettingsComponent.styleFor('answers')}, 'Answer')
       ]),
     ])
@@ -157,7 +157,6 @@ var SettingsComponent = {
     if (vm.mode() === mode) {
       style += 'text-decoration: underline; font-weight: bold';
     }
-    console.log(vm.mode());
     return style;
   },
 }
