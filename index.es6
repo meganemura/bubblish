@@ -97,6 +97,10 @@ var vm = {
     };
   },
 
+  clear_selections: () => {
+    vm.selections = [];
+  },
+
   querystring: () => {
     console.log('Mode: ' + vm.mode());
     console.log(vm.selections);
@@ -143,9 +147,10 @@ var MenuComponent = {
       m('span', {class: 'button octicon octicon-repo-push', style: 'padding: 8px', onclick: () => { vm.save() }}, [
         m('span', {class: 'text', style: 'padding: 8px'}, 'Save')
       ]),
-      m('a', {href: '.', style: 'text-decoration: none; color: black'}, [
-        m('span', {class: 'button octicon octicon-browser', style: 'padding: 8px'},
-        m('span', {class: 'text', style: 'padding: 8px'}, 'Clear')),
+      m('a', {style: 'text-decoration: none; color: black', onclick: () => { vm.clear_selections()}}, [
+        m('span', {class: 'button octicon octicon-browser', style: 'padding: 8px'}, [
+          m('span', {class: 'text', style: 'padding: 8px'}, 'Clear Selection'),
+        ]),
       ]),
     ])
   },

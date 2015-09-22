@@ -87,6 +87,10 @@ var vm = {
     };
   },
 
+  clear_selections: function clear_selections() {
+    vm.selections = [];
+  },
+
   querystring: function querystring() {
     console.log('Mode: ' + vm.mode());
     console.log(vm.selections);
@@ -130,7 +134,9 @@ var MenuComponent = {
   view: function view() {
     return m('div', [m('span', { 'class': 'button octicon octicon-repo-push', style: 'padding: 8px', onclick: function onclick() {
         vm.save();
-      } }, [m('span', { 'class': 'text', style: 'padding: 8px' }, 'Save')]), m('a', { href: '.', style: 'text-decoration: none; color: black' }, [m('span', { 'class': 'button octicon octicon-browser', style: 'padding: 8px' }, m('span', { 'class': 'text', style: 'padding: 8px' }, 'Clear'))])]);
+      } }, [m('span', { 'class': 'text', style: 'padding: 8px' }, 'Save')]), m('a', { style: 'text-decoration: none; color: black', onclick: function onclick() {
+        vm.clear_selections();
+      } }, [m('span', { 'class': 'button octicon octicon-browser', style: 'padding: 8px' }, [m('span', { 'class': 'text', style: 'padding: 8px' }, 'Clear Selection')])])]);
   }
 };
 
