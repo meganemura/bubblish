@@ -184,7 +184,7 @@ var SettingsComponent = {
       ]),
       m('br'),
       m('span', 'Rating: '),
-      m('span', {class: 'button octicon octicon-file-text', style: 'padding: 8px', onclick: () => { vm.ratingType('immediately'); vm.load(); }}, [
+      m('span', {class: 'button octicon octicon-gist-secret', style: 'padding: 8px', onclick: () => { vm.ratingType('immediately'); vm.load(); }}, [
         m('span', {class: 'text', style: 'padding: 8px'}, 'immediately'),
       ]),
     ])
