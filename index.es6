@@ -56,6 +56,7 @@ var vm = {
     vm.choices = vm.choices || vm.default.choices;
     vm.mode = m.prop('selections');
     vm.ratingType = m.prop('immediately');
+    vm.caption = m.prop('');
 
     vm.questions = [];
     for(var i = 1; i <= vm.question_size; i++) {
@@ -110,6 +111,7 @@ var vm = {
       choices: vm.choices.join(''),
       selections: vm.selections.join(''),
       answers: vm.answers.join(''),
+      caption: vm.caption(),
     };
     return m.route.buildQueryString(parameters);
   },
@@ -127,6 +129,7 @@ var vm = {
     vm.selections    = m.route.param('selections') && m.route.param('selections').split('') || [];
     vm.answers       = m.route.param('answers') && m.route.param('answers').split('') || [];
     vm.choices       = (m.route.param("choices") || "abcd").split("");
+    vm.caption(m.route.param('caption') || '');
   },
   // for dev
   top: () => {
@@ -144,6 +147,14 @@ var HeaderComponent = {
 var MenuComponent = {
   view: () => {
     return m('div', [
+      m('span', {class: 'octicon octicon-pencil', style: 'padding: 8px'}),
+      m('input', {
+        value: vm.caption(),
+        onchange: m.withAttr('value', vm.caption),
+        style: 'margin: 0px 0px 0px 4px; padding: 5px; width: 80%',
+        placeholder: 'Memo',
+      }),
+      m('br'),
       m('span', {class: 'button octicon octicon-repo-push', style: 'padding: 8px', onclick: () => { vm.save() }}, [
         m('span', {class: 'text', style: 'padding: 8px'}, 'Save')
       ]),
