@@ -67,6 +67,10 @@ var vm = {
     }
 
     // vm.save();
+
+    if (vm.mode() === 'answers' && index == vm.question_size - 1) {
+      vm.add_question();
+    }
   },
 
   add_question: function add_question() {
@@ -158,7 +162,7 @@ var SettingsComponent = {
         vm.mode('selections');
       } }, [m('span', { 'class': 'text', style: SettingsComponent.styleFor('selections') }, 'Selection')]), m('span', { 'class': 'button octicon octicon-file-zip', style: 'padding: 8px', onclick: function onclick() {
         vm.mode('answers');
-      } }, [m('span', { 'class': 'text', style: SettingsComponent.styleFor('answers') }, 'Answer')]), m('br'), m('span', 'Rating: '), m('span', { 'class': 'button octicon octicon-file-text', style: 'padding: 8px', onclick: function onclick() {
+      } }, [m('span', { 'class': 'text', style: SettingsComponent.styleFor('answers') }, 'Answer')]), m('br'), m('span', 'Rating: '), m('span', { 'class': 'button octicon octicon-gist-secret', style: 'padding: 8px', onclick: function onclick() {
         vm.ratingType('immediately');vm.load();
       } }, [m('span', { 'class': 'text', style: 'padding: 8px' }, 'immediately')])]);
   },
