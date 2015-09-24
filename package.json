@@ -10,6 +10,7 @@
   "author": "meganemura",
   "license": "MIT",
   "devDependencies": {
+    "babel-core": "^5.8.25",
     "gh-pages": "^0.4.0",
     "gulp": "^3.9.0",
     "gulp-babel": "^5.2.1",
