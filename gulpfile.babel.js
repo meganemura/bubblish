@@ -8,7 +8,7 @@ var plumber  = require('gulp-plumber');
 var sass     = require('gulp-sass');
 var server   = require('gulp-server-livereload');
 
-gulp.task('sass', function () {
+gulp.task('sass', () => {
   gulp.src('./src/stylesheets/**/*.scss')
   .pipe(plumber({errorHandler: notify.onError("<%= error.message %>")}))
   .pipe(sass().on('error', sass.logError))
@@ -16,24 +16,24 @@ gulp.task('sass', function () {
   .pipe(gulp.dest('./src/stylesheets'));
 });
 
-gulp.task('sass:watch', function () {
+gulp.task('sass:watch', () => {
   gulp.watch('./src/stylesheets/**/*.scss', ['sass']);
 });
 
-gulp.task('babel', function() {
+gulp.task('babel', () => {
   gulp.src('./src/*.es6')
   .pipe(plumber({errorHandler: notify.onError("<%= error.message %>")}))
   .pipe(babel())
   .pipe(gulp.dest('./src'))
 });
 
-gulp.task('babel:watch', function () {
+gulp.task('babel:watch', () => {
   gulp.watch('./src/*.es6', ['babel']);
 });
 
 gulp.task('watch', ['sass:watch', 'babel:watch']);
 
-gulp.task('deploy', ['babel', 'sass'], function() {
+gulp.task('deploy', ['babel', 'sass'], () => {
   return ghpages.publish(path.join(__dirname, 'src'), function(err) {
     console.log(err);
   });
