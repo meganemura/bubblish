@@ -77,6 +77,10 @@ var vm = {
     }
 
     // vm.save();
+
+    if (vm.mode() === 'answers' && index == vm.question_size - 1) {
+      vm.add_question();
+    }
   },
 
   add_question: () => {
