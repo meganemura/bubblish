@@ -4,7 +4,14 @@ var BubblesComponent = {
       vm.questions.map( (i) => {
         return [
           m('div', {class: 'row choices'}, [
-            m('span', {class: `col-xs-2 ${BubblesComponent.ratingClass(i)}`, style: 'font-weight: bold'}, i),
+            m('span', {class: `col-xs-2 ${BubblesComponent.ratingClass(i)}`, style: 'font-weight: bold'}, [
+              i,
+              () => {
+                if (vm.mode() === 'answers') {
+                  return [m('br'), m('span', {style: 'font-weight: normal; font-size: smaller'}, vm['selections'][i - 1])]
+                }
+              }(),
+            ]),
             vm.choices.map( (choice) => {
               return m('label', {class: `choice col-xs-${Math.floor(10 / vm.choices.length)}`, for: `${i}:${choice}`, align: 'center'}, [
                 m('input', {
