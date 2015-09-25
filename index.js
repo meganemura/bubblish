@@ -33,8 +33,11 @@ var BubblesComponent = {
     } else if (selection && !answer) {
       return selection == '0' ? '' : 'rateReady';
     } else if (selection == answer) {
-      return 'rateCorrect';
+      return answer == '0' ? '' : 'rateCorrect';
     } else {
+      if (selection == '0' || answer == '0') {
+        return 'rateReady';
+      }
       return 'rateIncorrect';
     }
   }
