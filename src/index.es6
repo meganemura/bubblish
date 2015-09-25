@@ -41,13 +41,13 @@ var BubblesComponent = {
     if (!selection && !answer) {
       return ''
     } else if (!selection && answer) {
-      return 'rateReady';
+      return 'rateReady'
     } else if (selection && !answer) {
       return 'rateReady'
     } else if (selection == answer) {
-      return 'rateCorrect';
+      return 'rateCorrect'
     } else {
-      return 'rateIncorrect';
+      return 'rateIncorrect'
     }
   },
 }
