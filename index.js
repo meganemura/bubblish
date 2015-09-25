@@ -29,9 +29,9 @@ var BubblesComponent = {
     if (!selection && !answer) {
       return '';
     } else if (!selection && answer) {
-      return 'rateReady';
+      return answer == '0' ? '' : 'rateReady';
     } else if (selection && !answer) {
-      return 'rateReady';
+      return selection == '0' ? '' : 'rateReady';
     } else if (selection == answer) {
       return 'rateCorrect';
     } else {
